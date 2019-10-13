@@ -1,18 +1,15 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route } from 'react-router-dom';
 
 import store from '../../redux/store';
-import Home from '../Home';
-import Dashboard from '../Dashboard';
+import Routes from '../../setup/Routes';
+import SiderDemo from '../../layout/Sidebar';
 
 function App() {
   return (
     <Provider store={store}>
-      <BrowserRouter>
-        <Route path='/' component={Home} exact />
-        <Route path='/dashboard' component={Dashboard} exact />
-      </BrowserRouter>
+      <Routes />
+      <SiderDemo />
     </Provider>
   );
 }
