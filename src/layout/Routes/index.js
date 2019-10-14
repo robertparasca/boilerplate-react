@@ -1,14 +1,14 @@
 import React from 'react';
 import Home from '../../components/Home';
 import Dashboard from '../../components/Dashboard';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 const Routes = () => {
     return (
-        <BrowserRouter>
+        <Switch>
             <Route path='/' component={Home} exact />
             <Route path='/dashboard' component={Dashboard} exact />
-        </BrowserRouter>
+        </Switch>
     );
 };
 
