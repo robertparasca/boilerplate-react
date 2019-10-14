@@ -3,11 +3,11 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 import store from '../../redux/store';
-import Routes from '../../layout/Routes';
+import Routes from '../Routes';
 
-import LayoutContent from '../../layout/LayoutContainer';
-import SidebarMenu from '../../layout/SidebarMenu';
-import ActualContent from '../../layout/ActualContent';
+import LayoutContent from '../LayoutContainer';
+import SidebarMenu from '../SidebarMenu';
+import ActualContent from '../ActualContent';
 
 function App() {
     return (

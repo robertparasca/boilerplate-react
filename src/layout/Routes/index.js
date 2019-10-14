@@ -1,6 +1,6 @@
 import React from 'react';
-import Home from '../../components/Home';
-import Dashboard from '../../components/Dashboard';
+import Home from '../../pages/Home';
+import Dashboard from '../../pages/Dashboard';
 import { Route, Switch } from 'react-router-dom';
 
 const Routes = () => {
