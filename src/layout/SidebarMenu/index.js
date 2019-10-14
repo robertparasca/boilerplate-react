@@ -29,9 +29,9 @@ class SidebarMenu extends Component {
                         </NavLink>
                     </Menu.Item>
                     <Menu.Item key="2">
-                        <NavLink exact to="/dashboard" activeStyle={this.activeStyle}>
+                        <NavLink exact to="/tickets" activeStyle={this.activeStyle}>
                             <Icon type="desktop" />
-                            <span>Dashboard</span>
+                            <span>Adeverințe</span>
                         </NavLink>
                     </Menu.Item>
                 </Menu>

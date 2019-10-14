@@ -9,7 +9,7 @@ const ActualContent = ({ children }) => {
     return (
         <Layout>
             <MainHeader />
-            <Content style={{ margin: '0 16px' }}>
+            <Content style={{ margin: '16px', padding: '16px', background: '#fff' }}>
                 { children }
             </Content>
         </Layout>
