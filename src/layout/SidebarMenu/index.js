@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Layout, Menu, Icon } from 'antd';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 const { Sider } = Layout;
 
@@ -19,6 +20,7 @@ class SidebarMenu extends Component {
 
     render() {
         return (
+            this.props.auth.isAuthenticated ?
             <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
                 <div className="logo" />
                 <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
@@ -36,8 +38,15 @@ class SidebarMenu extends Component {
                     </Menu.Item>
                 </Menu>
             </Sider>
+            : null
         );
     }
 }
 
-export default SidebarMenu;
+const mapPropsToState = (state) => {
+    return {
+        auth: state.auth
+    };
+};
+
+export default connect(mapPropsToState)(SidebarMenu);

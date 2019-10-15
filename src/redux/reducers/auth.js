@@ -1,5 +1,5 @@
 const initialState = {
-
+  isAuthenticated: false
 };
 
 const auth = (state = initialState, action) => {
