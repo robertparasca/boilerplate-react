@@ -43,9 +43,9 @@ class SidebarMenu extends Component {
     }
 }
 
-const mapPropsToState = (state) => {
+const mapPropsToState = (store) => {
     return {
-        auth: state.auth
+        auth: store.auth
     };
 };
 

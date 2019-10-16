@@ -1,0 +1,17 @@
+#login-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    form {
+        width: 30vw;
+        div {
+            margin-bottom: $defaultSpacing;
+            &:last-child {
+                display: flex;
+                justify-content: center;
+                margin-bottom: 0;
+            }
+        }
+    }
+}
