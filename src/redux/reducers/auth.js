@@ -16,13 +16,15 @@ const auth = (state = initialState, action) => {
         case LOGIN_SUCCESS: {
             return {
                 ...state,
-                isAuthenticated: true
+                isAuthenticated: true,
+                loading: false
             };
         }
         case LOGOUT_SUCCESS: {
             return {
                 ...state,
-                isAuthenticated: false
+                isAuthenticated: false,
+                loading: false
             }
         }
         default:

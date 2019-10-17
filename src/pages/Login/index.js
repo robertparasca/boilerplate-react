@@ -1,61 +1,89 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Input, Button, Icon } from 'antd';
+import React from 'react';
+import { connect } from 'react-redux';
+import { Input, Button, Icon, Spin } from 'antd';
+import { Redirect } from 'react-router-dom';
 import ReeValidator from 'ree-validate';
 
 import { login } from '../../redux/actions/auth';
-import { LOGIN_HAPPENING } from '../../redux/actions/auth';
 
-const Login = () => {
-    const validator = new ReeValidator({
-        email: 'required|email'
-    });
+class Login extends React.Component {
+    constructor() {
+        super();
+        this.validator = new ReeValidator({
+            email: 'required|email'
+        });
+        this.state = {
+            email: '',
+            errors: this.validator.errors
+        };
+    }
 
-    // const dispatch = useDispatch();
-    const [loginForm, setLoginForm] = useState({
-        email: '',
-        errors: validator.errors
-    });
-
-    const handleOnSubmit = (event) => {
+    handleOnSubmit = (event) => {
         event.preventDefault();
-        validator.validateAll(loginForm).then((success) => {
-            console.log(loginForm);
+        this.validator.validateAll(this.state).then((success) => {
+            console.log(this.state);
             if (success) {
-                login()();
+                this.props.login(this.state.email);
             } else {
-                setLoginForm({ ...loginForm, errors: validator.errors });
+                this.setState({
+                    errors: this.validator.errors
+                });
             }
         })
     };
 
-    const handleOnChange = (e) => {
+    handleOnChange = (e) => {
         const { name, value } = e.target;
-        validator.errors.remove(name);
-        validator.validate(name, value).then(() => {
-            const { errors } = validator;
-            setLoginForm({ email: value, errors });
+        this.validator.errors.remove(name);
+        this.validator.validate(name, value).then(() => {
+            const { errors } = this.validator;
+            this.setState({
+                email: value,
+                errors
+            });
         });
     };
 
-    return (
-        <section id='login-page'>
-            <form onSubmit={handleOnSubmit}>
-                <div>
-                    <Input
-                        name='email'
-                        placeholder='Email'
-                        prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />}
-                        onChange={handleOnChange}
-                    />
-                    {loginForm.errors.items.map((error, index) => (<div key={index}>{error.msg}</div>))}
-                </div>
-                <div>
-                    <Button type='primary' htmlType='submit'>Login</Button>
-                </div>
-            </form>
-        </section>
-    );
+    render() {
+
+        console.log(this.props);
+        return (
+            !this.props.isAuthenticated ?
+                <section id='login-page'>
+                    {
+                        !this.props.loading ?
+                            <form onSubmit={this.handleOnSubmit}>
+                                <div>
+                                    <Input
+                                        name='email'
+                                        placeholder='Email'
+                                        prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                        onChange={this.handleOnChange}
+                                    />
+                                    <div>{this.validator.errors.has('email') ? this.validator.errors.first('email') : null}</div>
+                                </div>
+                                <div>
+                                    <Button type='primary' htmlType='submit'>Login</Button>
+                                </div>
+                            </form>
+                        : <Spin />
+                    }
+                </section>
+            : <Redirect to='/' />
+        );
+    }
 };
 
-export default Login;
+const mapStateToProps = (store) => {
+    return {
+        ...store.auth
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        login: (email) => dispatch(login(email))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
