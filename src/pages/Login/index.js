@@ -21,7 +21,6 @@ class Login extends React.Component {
     handleOnSubmit = (event) => {
         event.preventDefault();
         this.validator.validateAll(this.state).then((success) => {
-            console.log(this.state);
             if (success) {
                 this.props.login(this.state.email);
             } else {
@@ -45,8 +44,6 @@ class Login extends React.Component {
     };
 
     render() {
-
-        console.log(this.props);
         return (
             !this.props.isAuthenticated ?
                 <section id='login-page'>

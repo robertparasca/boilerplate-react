@@ -1,4 +1,4 @@
-import { LOGIN_HAPPENING, LOGIN_SUCCESS, LOGOUT_SUCCESS } from '../actions/auth';
+import { LOGIN_HAPPENING, LOGIN_SUCCESS, LOGOUT_SUCCESS, LOGOUT_HAPPENING } from '../actions/auth';
 
 const initialState = {
     isAuthenticated: false,
@@ -7,7 +7,8 @@ const initialState = {
 
 const auth = (state = initialState, action) => {
     switch (action.type) {
-        case LOGIN_HAPPENING: {
+        case LOGIN_HAPPENING:
+        case LOGOUT_HAPPENING: {
             return {
                 ...state,
                 loading: true
