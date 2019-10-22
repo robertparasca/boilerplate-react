@@ -7,10 +7,11 @@ import ReeValidator from 'ree-validate';
 import { login } from '../../redux/actions/auth';
 
 class Login extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.validator = new ReeValidator({
-            email: 'required|email'
+            // email: 'required|email'
+            email: ''
         });
         this.state = {
             email: '',
