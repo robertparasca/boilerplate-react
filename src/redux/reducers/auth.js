@@ -1,7 +1,8 @@
 import { LOGIN_HAPPENING, LOGIN_SUCCESS, LOGOUT_SUCCESS, LOGOUT_HAPPENING } from '../actions/auth';
+import { isTokenSet } from '../../utils/auth';
 
 const initialState = {
-    isAuthenticated: false,
+    isAuthenticated: isTokenSet(),
     loading: false
 };
 

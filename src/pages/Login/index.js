@@ -9,10 +9,11 @@ import { login } from '../../redux/actions/auth';
 import { config } from '../../utils/config';
 
 class Login extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.validator = new ReeValidator({
-            email: 'required|email'
+            // email: 'required|email'
+            email: ''
         });
         this.state = {
             email: '',

@@ -2,7 +2,7 @@ import { lsConstants } from '../utils/config';
 
 const { tokenKey } = lsConstants;
 
-export const saveToken = (token) => localStorage.set(tokenKey, token);
+export const saveToken = (token) => localStorage.setItem(tokenKey, token);
 
 export const deleteToken = () => localStorage.removeItem(tokenKey);
 
