@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import { Input, Button, Icon, Spin } from 'antd';
 import { Redirect } from 'react-router-dom';
 import ReeValidator from 'ree-validate';
+import GoogleLogin from 'react-google-login';
 
 import { login } from '../../redux/actions/auth';
+import { config } from '../../utils/config';
 
 class Login extends React.Component {
     constructor() {
@@ -43,13 +45,18 @@ class Login extends React.Component {
         });
     };
 
+    responseGoogle = (response) => {
+        console.log(response);
+    };
+
     render() {
         return (
             !this.props.isAuthenticated ?
                 <section id='login-page'>
                     {
                         !this.props.loading ?
-                            <form onSubmit={this.handleOnSubmit}>
+                            <div>
+                                <form onSubmit={this.handleOnSubmit}>
                                 <div>
                                     <Input
                                         name='email'
@@ -63,13 +70,21 @@ class Login extends React.Component {
                                     <Button type='primary' htmlType='submit'>Login</Button>
                                 </div>
                             </form>
+                            <GoogleLogin
+                                clientId={config.googleClient}
+                                buttonText="Login"
+                                onSuccess={this.responseGoogle}
+                                onFailure={this.responseGoogle}
+                                cookiePolicy={'single_host_origin'}
+                            />
+                            </div>
                         : <Spin />
                     }
                 </section>
             : <Redirect to='/' />
         );
     }
-};
+}
 
 const mapStateToProps = (store) => {
     return {
