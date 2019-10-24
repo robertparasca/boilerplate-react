@@ -8,8 +8,13 @@ import Routes from '../Routes';
 import LayoutContent from '../LayoutContainer';
 import SidebarMenu from '../SidebarMenu';
 import ActualContent from '../ActualContent';
+import { getToken, tokenExists } from '../../utils/auth';
+import { setToken } from '../../utils/axios';
 
-function App() {
+const App = () => {
+    if (tokenExists()) {
+        setToken(getToken());
+    }
     return (
         <Provider store={store}>
             <BrowserRouter>
@@ -22,6 +27,6 @@ function App() {
             </BrowserRouter>
         </Provider>
     );
-}
+};
 
 export default App;

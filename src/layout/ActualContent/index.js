@@ -13,9 +13,7 @@ const ActualContent = ({ children }) => {
     const authState = useSelector((state) => state.auth);
     return (
         <Layout>
-            { authState.isAuthenticated ?
-            <MainHeader />
-            : null }
+            { authState.isAuthenticated ? <MainHeader /> : null }
             <Content style={authState.isAuthenticated ? style : styleLogout}>
                 { children }
             </Content>

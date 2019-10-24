@@ -1,10 +1,11 @@
-import { LOGIN_HAPPENING, LOGIN_SUCCESS, LOGOUT_SUCCESS, LOGOUT_HAPPENING } from '../actions/auth';
-import { isTokenSet } from '../../utils/auth';
+import { LOGIN_HAPPENING, LOGIN_SUCCESS, LOGOUT_SUCCESS, LOGOUT_HAPPENING, LOGIN_FAILED } from '../actions/auth';
+import { tokenExists } from '../../utils/auth';
 
 const initialState = {
-    isAuthenticated: isTokenSet(),
+    isAuthenticated: tokenExists(),
     loading: false,
-    user: null
+    user: null,
+    errors: []
 };
 
 const auth = (state = initialState, action) => {
@@ -21,7 +22,15 @@ const auth = (state = initialState, action) => {
                 ...state,
                 isAuthenticated: true,
                 loading: false,
-                user: action.user
+                user: action.user,
+                errors: []
+            };
+        }
+        case LOGIN_FAILED: {
+            return {
+                ...state,
+                loading: false,
+                errors: action.errors
             };
         }
         case LOGOUT_SUCCESS: {
@@ -30,7 +39,7 @@ const auth = (state = initialState, action) => {
                 isAuthenticated: false,
                 loading: false,
                 user: null
-            }
+            };
         }
         default:
             return state;

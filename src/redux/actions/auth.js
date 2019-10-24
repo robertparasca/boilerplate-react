@@ -1,11 +1,14 @@
 import axiosInstance from '../../utils/axios';
 import { deleteToken, saveToken } from '../../utils/auth';
 import { setToken, unsetToken } from '../../utils/axios';
+import { config } from '../../utils/config';
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_HAPPENING = 'LOGIN_HAPPENING';
+export const LOGIN_FAILED = 'LOGIN_FAILED';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const LOGOUT_HAPPENING = 'LOGOUT_HAPPENING';
+export const REFRESH_TOKEN = 'REFRESH_TOKEN';
 
 const formatNameFromGoogle = (name) => {
     return name ? name.split('/')[0] : '';
@@ -23,11 +26,15 @@ export const login = (googleData) => {
                 google_id: googleData.profileObj.googleId,
                 image_url: googleData.profileObj.imageUrl,
             };
-            const response = await axiosInstance.post('/callback', body);
-            const { data } = response;
-            saveToken(data.access_token);
-            setToken(data.access_token);
-            dispatch({ type: LOGIN_SUCCESS, user: data.user });
+            if (body.email.split('@')[1] !== config.organization) {
+                dispatch({ type: LOGIN_FAILED, errors: ['Your account is not part of the organization.'] })
+            } else {
+                const response = await axiosInstance.post('/callback', body);
+                const { data } = response;
+                saveToken(data.access_token);
+                setToken(data.access_token);
+                dispatch({ type: LOGIN_SUCCESS, user: data.user });
+            }
         } catch(e) {
             console.log(e.message);
         }
@@ -39,25 +46,32 @@ export const logout = () => {
         dispatch({ type: LOGOUT_SUCCESS });
         unsetToken();
         deleteToken();
-        // try {
-        //     const data = await axiosInstance.get('/');
-        //     // dispatch({ type: LOGOUT_HAPPENING });
-        //     dispatch({ type: LOGOUT_SUCCESS });
-        //     unsetToken();
-        //     deleteToken();
-        //     // setTimeout(() => dispatch({ type: LOGOUT_SUCCESS }), 1000);
-        // } catch(e) {
-        //     console.log(e);
-        // }
+        // todo: well, i should implement a route for this
     };
 };
 
-export const loginWithPassword = (data) => {
-    return (dispatch) => {
+export const me = () => {
+    return async (dispatch) => {
         try {
-            const response = axiosInstance.post('/login-password', data);
+            const data = await axiosInstance.get('/me');
+            dispatch({ type: LOGIN_SUCCESS, user: data.data });
         } catch (e) {
             console.log(e);
         }
+    };
+};
+
+export const refreshToken = () => {
+    // todo: to be implemented later;
+};
+
+export const loginWithPassword = (data) => {
+    return async (dispatch) => {
+        try {
+            const response = await axiosInstance.post('/login-password', data);
+        } catch (e) {
+            console.log(e);
+        }
+        // todo: to be done later;
     };
 };

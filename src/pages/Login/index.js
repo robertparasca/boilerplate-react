@@ -8,6 +8,7 @@ import { login } from '../../redux/actions/auth';
 import { config } from '../../utils/config';
 import Logo from '../../components/Logo';
 import CustomGoogleButton from './CustomGoogleButton';
+import Errors from './Errors';
 
 class Login extends React.Component {
     constructor(props) {
@@ -20,7 +21,7 @@ class Login extends React.Component {
                 <section id='login-page'>
                     {
                         !this.props.loading ?
-                            <div>
+                            <div className='form-and-logo'>
                                 <Logo />
                                 <GoogleLogin
                                     clientId={config.googleClient}
@@ -32,6 +33,7 @@ class Login extends React.Component {
                                         <CustomGoogleButton {...renderProps} />
                                     )}
                                 />
+                                <Errors errors={this.props.errors} />
                             </div>
                         : <Spin />
                     }

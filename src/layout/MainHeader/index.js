@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Layout, Avatar, Dropdown, Menu } from 'antd';
+import { Layout, Dropdown, Menu } from 'antd';
 import { Link } from 'react-router-dom';
 import { logout } from '../../redux/actions/auth';
 

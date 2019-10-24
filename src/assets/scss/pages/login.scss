@@ -3,15 +3,14 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    form {
-        width: 30vw;
-        div {
+    .form-and-logo {
+        text-align: center;
+        margin-bottom: $defaultSpacing;
+        form {
+            width: 30vw;
+        }
+        #google-login {
             margin-bottom: $defaultSpacing;
-            &:last-child {
-                display: flex;
-                justify-content: center;
-                margin-bottom: 0;
-            }
         }
     }
 }
