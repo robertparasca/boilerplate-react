@@ -6,6 +6,7 @@ import Home from '../../pages/Home';
 import Login from '../../pages/Login';
 import Tickets from '../../pages/Tickets';
 import Ticket from '../../pages/Ticket';
+import MyProfile from '../../pages/MyProfile';
 
 const Routes = () => {
     return (
@@ -14,6 +15,7 @@ const Routes = () => {
             <Route path='/login' component={Login} exact />
             <PrivateRoute path='/tickets' component={Tickets} exact />
             <PrivateRoute path='/tickets/new' component={Ticket} exact />
+            <PrivateRoute path='/my-profile' component={MyProfile} exact />
         </Switch>
     );
 };

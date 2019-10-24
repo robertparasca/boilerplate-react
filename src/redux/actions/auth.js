@@ -7,32 +7,56 @@ export const LOGIN_HAPPENING = 'LOGIN_HAPPENING';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const LOGOUT_HAPPENING = 'LOGOUT_HAPPENING';
 
-export const login = (email) => {
+const formatNameFromGoogle = (name) => {
+    return name ? name.split('/')[0] : '';
+};
+
+export const login = (googleData) => {
     return async (dispatch) => {
         dispatch({ type: LOGIN_HAPPENING });
         try {
-            const data = await axiosInstance.get('https://jsonplaceholder.typicode.com/posts');
-            console.log(data);
-            // setTimeout(() => dispatch({ type: LOGIN_SUCCESS }), 2000);
-            saveToken('123');
-            setToken('123');
-            dispatch({ type: LOGIN_SUCCESS });
+            const body = {
+                email: googleData.profileObj.email,
+                name: formatNameFromGoogle(googleData.profileObj.name),
+                first_name: googleData.profileObj.givenName,
+                last_name: formatNameFromGoogle(googleData.profileObj.familyName).trim(),
+                google_id: googleData.profileObj.googleId,
+                image_url: googleData.profileObj.imageUrl,
+            };
+            const response = await axiosInstance.post('/callback', body);
+            const { data } = response;
+            saveToken(data.access_token);
+            setToken(data.access_token);
+            dispatch({ type: LOGIN_SUCCESS, user: data.user });
         } catch(e) {
-            console.log(e);
+            console.log(e.message);
         }
     };
 };
 
 export const logout = () => {
     return async (dispatch) => {
+        dispatch({ type: LOGOUT_SUCCESS });
+        unsetToken();
+        deleteToken();
+        // try {
+        //     const data = await axiosInstance.get('/');
+        //     // dispatch({ type: LOGOUT_HAPPENING });
+        //     dispatch({ type: LOGOUT_SUCCESS });
+        //     unsetToken();
+        //     deleteToken();
+        //     // setTimeout(() => dispatch({ type: LOGOUT_SUCCESS }), 1000);
+        // } catch(e) {
+        //     console.log(e);
+        // }
+    };
+};
+
+export const loginWithPassword = (data) => {
+    return (dispatch) => {
         try {
-            const data = await axiosInstance.get('/');
-            // dispatch({ type: LOGOUT_HAPPENING });
-            dispatch({ type: LOGOUT_SUCCESS });
-            unsetToken();
-            deleteToken();
-            // setTimeout(() => dispatch({ type: LOGOUT_SUCCESS }), 1000);
-        } catch(e) {
+            const response = axiosInstance.post('/login-password', data);
+        } catch (e) {
             console.log(e);
         }
     };

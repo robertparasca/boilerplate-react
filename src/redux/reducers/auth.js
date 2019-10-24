@@ -3,7 +3,8 @@ import { isTokenSet } from '../../utils/auth';
 
 const initialState = {
     isAuthenticated: isTokenSet(),
-    loading: false
+    loading: false,
+    user: null
 };
 
 const auth = (state = initialState, action) => {
@@ -19,14 +20,16 @@ const auth = (state = initialState, action) => {
             return {
                 ...state,
                 isAuthenticated: true,
-                loading: false
+                loading: false,
+                user: action.user
             };
         }
         case LOGOUT_SUCCESS: {
             return {
                 ...state,
                 isAuthenticated: false,
-                loading: false
+                loading: false,
+                user: null
             }
         }
         default:
