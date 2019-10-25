@@ -19,7 +19,6 @@ class SidebarMenu extends Component {
     onCollapse = collapsed => {
         this.setState({ collapsed });
     };
-
     render() {
         return (
             this.props.auth.isAuthenticated ?
@@ -28,7 +27,7 @@ class SidebarMenu extends Component {
                 <Menu theme='dark' defaultSelectedKeys={[this.props.router.location.pathname]} mode='inline'>
                     {routes.map((route) => {
                         return (
-                            <Menu.Item key={route.path}>
+                            <Menu.Item key={route.key}>
                                 <NavLink exact={route.exact} to={route.path} activeStyle={this.activeStyle}>
                                     <Icon type={route.icon} />
                                     <span>{route.name}</span>

@@ -27,7 +27,7 @@ export const login = (googleData) => {
                 image_url: googleData.profileObj.imageUrl,
             };
             if (body.email.split('@')[1] !== config.organization) {
-                dispatch({ type: LOGIN_FAILED, errors: ['Your account is not part of the organization.'] })
+                dispatch({ type: LOGIN_FAILED, errors: [{ message: 'Your account is not part of the organization.' }] })
             } else {
                 const response = await axiosInstance.post('/callback', body);
                 const { data } = response;
@@ -46,7 +46,7 @@ export const logout = () => {
         dispatch({ type: LOGOUT_SUCCESS });
         unsetToken();
         deleteToken();
-        // todo: well, i should implement a route for this
+        // todo: to be implemented later;
     };
 };
 
@@ -72,6 +72,6 @@ export const loginWithPassword = (data) => {
         } catch (e) {
             console.log(e);
         }
-        // todo: to be done later;
+        // todo: to be implemented later;
     };
 };

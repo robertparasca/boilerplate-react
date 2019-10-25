@@ -29,7 +29,7 @@ class LoginWithPassword extends React.Component {
                     errors: this.validator.errors
                 });
             }
-        })
+        });
     };
 
     handleOnChange = (e) => {

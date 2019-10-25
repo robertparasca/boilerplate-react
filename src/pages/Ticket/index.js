@@ -4,10 +4,10 @@ import NewTicketForm from './NewTicketForm';
 
 const Ticket = () => {
     return (
-        <div>
-            <h1 style={{ textAlign: 'center' }}>Cerere</h1>
+        <section id='ticket-page'>
+            <h2>Cerere</h2>
             <NewTicketForm />
-        </div>
+        </section>
     );
   };
 

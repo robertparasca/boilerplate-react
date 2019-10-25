@@ -6,11 +6,13 @@ import TicketsTable from '../../components/TicketsTable';
 
 const Dashboard = () => {
     return (
-        <div>
-            <h1>Cereri adeverințe</h1>
-            <Button type="primary"><Link to='/tickets/new'>Depune cerere</Link></Button>
+        <section id='tickets-page'>
+            <div className='header'>
+                <h2>Cereri adeverințe</h2>
+                <Button type="primary"><Link to='/tickets/new'>Depune cerere</Link></Button>
+            </div>
             <TicketsTable />
-        </div>
+        </section>
     );
   };
 
