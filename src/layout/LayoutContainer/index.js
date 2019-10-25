@@ -8,10 +8,11 @@ const LayoutContent = ({ children }) => {
     const authState = useSelector((state) => state.auth);
     if (authState.isAuthenticated && authState.user === null) {
         me()(dispatch);
+        return (<Spin id='layout-content-spinner' />);
     }
     return (
         <Layout style={{ minHeight: '100vh' }}>
-            { authState.isAuthenticated && authState.user === null ? <Spin /> : children }
+            { children }
         </Layout>
     );
 };

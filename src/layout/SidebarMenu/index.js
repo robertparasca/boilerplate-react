@@ -3,6 +3,8 @@ import { Layout, Menu, Icon } from 'antd';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import routes from './routes';
+
 const { Sider } = Layout;
 
 class SidebarMenu extends Component {
@@ -22,20 +24,18 @@ class SidebarMenu extends Component {
         return (
             this.props.auth.isAuthenticated ?
             <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
-                <div className="logo" />
-                <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-                    <Menu.Item key="1">
-                        <NavLink exact to="/" activeStyle={this.activeStyle}>
-                            <Icon type="pie-chart" />
-                            <span>Home</span>
-                        </NavLink>
-                    </Menu.Item>
-                    <Menu.Item key="2">
-                        <NavLink exact to="/tickets" activeStyle={this.activeStyle}>
-                            <Icon type="desktop" />
-                            <span>Adeverințe</span>
-                        </NavLink>
-                    </Menu.Item>
+                <div className='logo' />
+                <Menu theme='dark' defaultSelectedKeys={[this.props.router.location.pathname]} mode='inline'>
+                    {routes.map((route) => {
+                        return (
+                            <Menu.Item key={route.path}>
+                                <NavLink exact={route.exact} to={route.path} activeStyle={this.activeStyle}>
+                                    <Icon type={route.icon} />
+                                    <span>{route.name}</span>
+                                </NavLink>
+                            </Menu.Item>
+                        )
+                    })}
                 </Menu>
             </Sider>
             : null
@@ -45,7 +45,8 @@ class SidebarMenu extends Component {
 
 const mapPropsToState = (store) => {
     return {
-        auth: store.auth
+        auth: store.auth,
+        router: store.router
     };
 };
 

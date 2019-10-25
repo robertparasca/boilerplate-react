@@ -1,43 +1,52 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Table } from 'antd';
 
-const dataSource = [
-  {
-    key: '1',
-    name: 'Mike',
-    age: 32,
-    address: '10 Downing Street',
-  },
-  {
-    key: '2',
-    name: 'John',
-    age: 42,
-    address: '10 Downing Street',
-  },
-];
+import { fetchTickets } from '../../redux/actions/tickets';
 
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-  },
-];
+class TicketsTable extends React.Component {
+    constructor(props) {
+        super(props);
+        this.columns = [
+            {
+                title: 'Data',
+                dataIndex: 'date',
+                key: 'date',
+            },
+            {
+                title: 'Motiv',
+                dataIndex: 'reason',
+                key: 'reason',
+            },
+            {
+                title: 'Status',
+                dataIndex: 'status',
+                key: 'status',
+            }
+        ];
+    }
 
-const TicketsTable = () => {
-  return (
-    <Table dataSource={dataSource} columns={columns} />
-  );
+    componentDidMount = () => {
+        this.props.getTickets();
+    };
+
+    render() {
+        return (
+            <Table dataSource={this.props.tickets} columns={this.columns} loading={this.props.loading} />
+        );
+    }
+}
+
+const mapPropsToState = (state) => {
+    return {
+        ...state.tickets
+    };
 };
 
-export default TicketsTable;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getTickets: () => dispatch(fetchTickets())
+    };
+};
+
+export default connect(mapPropsToState, mapDispatchToProps)(TicketsTable);
