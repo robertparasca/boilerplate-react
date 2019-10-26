@@ -65,10 +65,17 @@ export const refreshToken = () => {
     // todo: to be implemented later;
 };
 
-export const loginWithPassword = (data) => {
+export const loginWithPassword = (email, password) => {
     return async (dispatch) => {
+        dispatch({ type: LOGIN_HAPPENING });
         try {
-            const response = await axiosInstance.post('/login-password', data);
+            const body = {
+                email,
+                password
+            };
+            const response = await axiosInstance.post('/login-password', body);
+            console.log(response.data);
+            // dispatch({ type: LOGIN_SUCCESS });
         } catch (e) {
             console.log(e);
         }

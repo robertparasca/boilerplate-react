@@ -16,29 +16,29 @@ class Login extends React.Component {
     }
 
     render() {
+        if (this.props.isAuthenticated) {
+            return <Redirect to='/' />;
+        }
         return (
-            !this.props.isAuthenticated ?
-                <section id='login-page'>
-                    {
-                        !this.props.loading ?
-                            <div className='form-and-logo'>
-                                <Logo />
-                                <GoogleLogin
-                                    clientId={config.googleClient}
-                                    buttonText="Login"
-                                    onSuccess={this.props.login}
-                                    onFailure={this.props.login}
-                                    cookiePolicy={'single_host_origin'}
-                                    render={renderProps => (
-                                        <CustomGoogleButton {...renderProps} />
-                                    )}
-                                />
-                                <Errors errors={this.props.errors} />
-                            </div>
-                        : <Spin />
-                    }
-                </section>
-            : <Redirect to='/' />
+            <section id='login-page'>
+                {
+                    !this.props.loading ?
+                        <div className='form-and-logo'>
+                            <Logo />
+                            <GoogleLogin
+                                clientId={config.googleClient}
+                                onSuccess={this.props.login}
+                                onFailure={this.props.login}
+                                cookiePolicy={'single_host_origin'}
+                                render={renderProps => (
+                                    <CustomGoogleButton {...renderProps} />
+                                )}
+                            />
+                            <Errors errors={this.props.errors} />
+                        </div>
+                    : <Spin />
+                }
+            </section>
         );
     }
 }

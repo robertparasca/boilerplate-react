@@ -79,13 +79,13 @@ class NewTicketForm extends React.Component {
                             onChange={this.onChangeHandler}
                         />
                     </Form.Item>
-                        {
-                            this.validator.errors.has('reason') ?
-                                <Form.Item>
-                                    <Alert type='error' message={this.validator.errors.first('reason')} />
-                                </Form.Item>
-                            : null
-                        }
+                    {
+                        this.validator.errors.has('reason') ?
+                            <Form.Item>
+                                <Alert type='error' message={this.validator.errors.first('reason')} />
+                            </Form.Item>
+                        : null
+                    }
                     <Form.Item>
                         <Button type='primary' htmlType='submit' className='submit-form'>
                             Trimite
