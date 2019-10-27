@@ -6,7 +6,7 @@ import ReeValidator from 'ree-validate';
 import { loginWithPassword } from '../../redux/actions/auth';
 import { connect } from 'react-redux';
 import Logo from '../../components/Logo';
-import Errors from '../Login/Errors';
+import Errors from '../../components/Errors';
 
 class LoginWithPassword extends React.Component {
     constructor(props) {

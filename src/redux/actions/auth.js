@@ -74,10 +74,16 @@ export const loginWithPassword = (email, password) => {
                 password
             };
             const response = await axiosInstance.post('/login-password', body);
-            console.log(response.data);
-            // dispatch({ type: LOGIN_SUCCESS });
+            const { data } = response;
+            saveToken(data.access_token);
+            setToken(data.access_token);
+            dispatch({ type: LOGIN_SUCCESS, user: data.user });
         } catch (e) {
-            console.log(e);
+            const { status, data } = e.response;
+            console.log(e.response, data.errors.message);
+            if (status === 422) {
+                dispatch({ type: LOGIN_FAILED, errors: [data.errors] });
+            }
         }
         // todo: to be implemented later;
     };

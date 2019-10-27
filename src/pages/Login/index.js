@@ -8,7 +8,7 @@ import { login } from '../../redux/actions/auth';
 import { config } from '../../utils/config';
 import Logo from '../../components/Logo';
 import CustomGoogleButton from './CustomGoogleButton';
-import Errors from './Errors';
+import Errors from '../../components/Errors';
 
 class Login extends React.Component {
     constructor(props) {

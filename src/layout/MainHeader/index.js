@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Layout, Dropdown, Menu } from 'antd';
+import { Layout, Dropdown, Menu, Avatar } from 'antd';
 import { Link } from 'react-router-dom';
 import { logout } from '../../redux/actions/auth';
 
@@ -24,7 +24,7 @@ const MainHeader = () => {
                     <Menu.Item key="2" onClick={() => dispatch(logout())}>Logout</Menu.Item>
                 </Menu>
             } trigger={['click']}>
-                <img src={authState.user.image_url} />
+                {authState.user.image_url ? <img src={authState.user.image_url} /> : <Avatar icon="user" style={{ cursor: 'pointer' }} /> }
             </Dropdown>
         </Header>
     );
