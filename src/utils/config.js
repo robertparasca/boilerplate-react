@@ -5,7 +5,8 @@ export const config = {
     dateFormat: {
         api: 'YYYY-MM-DD HH:MM:SS',
         viewComplex: 'DD.MM.YYYY HH:mm'
-    }
+    },
+    sentryUrl: 'https://1bd8dce884c048d088c017e9d51a135e@sentry.io/1797962'
 };
 
 export const lsConstants = {
