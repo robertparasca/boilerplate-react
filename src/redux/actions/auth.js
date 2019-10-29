@@ -52,6 +52,7 @@ export const logout = () => {
 
 export const me = () => {
     return async (dispatch) => {
+        dispatch({ type: LOGIN_HAPPENING });
         try {
             const data = await axiosInstance.get('/me');
             dispatch({ type: LOGIN_SUCCESS, user: data.data });
