@@ -33,7 +33,8 @@ export const login = (googleData) => {
                 const { data } = response;
                 saveToken(data.access_token);
                 setToken(data.access_token);
-                dispatch({ type: LOGIN_SUCCESS, user: data.user });
+                const permissions = data.user.permissions.map((permission) => permission.name);
+                dispatch({ type: LOGIN_SUCCESS, user: data.user, permissions  });
             }
         } catch(e) {
             console.log(e.message);
@@ -56,7 +57,8 @@ export const me = () => {
         try {
             const response = await axiosInstance.get('/me');
             const { data } = response;
-            dispatch({ type: LOGIN_SUCCESS, user: data.user });
+            const permissions = data.user.permissions.map((permission) => permission.name);
+            dispatch({ type: LOGIN_SUCCESS, user: data.user, permissions });
         } catch (e) {
             console.log(e);
         }
@@ -77,9 +79,10 @@ export const loginWithPassword = (email, password) => {
             };
             const response = await axiosInstance.post('/login-password', body);
             const { data } = response;
+            const permissions = data.user.permissions.map((permission) => permission.name);
             saveToken(data.access_token);
             setToken(data.access_token);
-            dispatch({ type: LOGIN_SUCCESS, user: data.user });
+            dispatch({ type: LOGIN_SUCCESS, user: data.user, permissions });
         } catch (e) {
             const { status, data } = e.response;
             console.log(e.response, data.errors.message);

@@ -5,7 +5,8 @@ const initialState = {
     isAuthenticated: tokenExists(),
     loading: false,
     user: null,
-    errors: []
+    errors: [],
+    permissions: []
 };
 
 const auth = (state = initialState, action) => {
@@ -23,7 +24,8 @@ const auth = (state = initialState, action) => {
                 isAuthenticated: true,
                 loading: false,
                 user: action.user,
-                errors: []
+                errors: [],
+                permissions: action.permissions
             };
         }
         case LOGIN_FAILED: {
@@ -38,7 +40,8 @@ const auth = (state = initialState, action) => {
                 ...state,
                 isAuthenticated: false,
                 loading: false,
-                user: null
+                user: null,
+                permissions: []
             };
         }
         default:
