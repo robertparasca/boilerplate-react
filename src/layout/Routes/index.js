@@ -7,6 +7,7 @@ import Login from '../../pages/Login';
 import Tickets from '../../pages/Tickets';
 import Ticket from '../../pages/Ticket';
 import MyProfile from '../../pages/MyProfile';
+import Users from '../../pages/Users';
 import LoginWithPassword from '../../pages/LoginWithPassword';
 
 const Routes = () => {
@@ -18,6 +19,7 @@ const Routes = () => {
             <PrivateRoute path='/tickets' component={Tickets} exact />
             <PrivateRoute path='/tickets/new' component={Ticket} exact />
             <PrivateRoute path='/my-profile' component={MyProfile} exact />
+            <PrivateRoute path='/users' component={Users} exact />
         </Switch>
     );
 };

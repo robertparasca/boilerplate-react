@@ -84,6 +84,7 @@ export const loginWithPassword = (email, password) => {
             setToken(data.access_token);
             dispatch({ type: LOGIN_SUCCESS, user: data.user, permissions });
         } catch (e) {
+            console.log(e);
             const { status, data } = e.response;
             console.log(e.response, data.errors.message);
             if (status === 422) {

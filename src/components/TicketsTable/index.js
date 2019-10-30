@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Table } from 'antd';
+import { Table} from 'antd';
 
 import { fetchTickets } from '../../redux/actions/tickets';
+import { hasPermissions } from '../../utils/permissions';
+import HandleModal from './HandleModal';
 
 class TicketsTable extends React.Component {
     constructor(props) {
@@ -24,10 +26,25 @@ class TicketsTable extends React.Component {
                 key: 'status',
             }
         ];
+        this.validatePermissions = ['TicketController_validate'];
     }
 
     componentDidMount = () => {
         this.props.getTickets();
+        if (hasPermissions(this.props.auth.permissions, this.validatePermissions)) {
+            this.columns.push({
+                title: 'Validate',
+                dataIndex: 'status',
+                key: 'validate',
+                render: (value, row) => <HandleModal ticket={row} ticketStatus={value} />,
+            });
+            this.columns.push({
+                title: 'Reject',
+                dataIndex: 'status',
+                key: 'reject',
+                render: (value, row) => <HandleModal ticket={row} ticketStatus={value} reject={true} />,
+            });
+        }
     };
 
     render() {
@@ -39,7 +56,8 @@ class TicketsTable extends React.Component {
 
 const mapPropsToState = (state) => {
     return {
-        ...state.tickets
+        ...state.tickets,
+        auth: state.auth
     };
 };
 
