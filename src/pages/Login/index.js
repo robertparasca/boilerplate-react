@@ -4,7 +4,7 @@ import { Link, Redirect } from 'react-router-dom';
 import GoogleLogin from 'react-google-login';
 import { Spin } from 'antd';
 
-import { login } from '../../redux/actions/auth';
+import { login, resetState } from '../../redux/actions/auth';
 import { config } from '../../utils/config';
 import Logo from '../../components/Logo';
 import CustomGoogleButton from './CustomGoogleButton';
@@ -36,7 +36,7 @@ class Login extends React.Component {
                             />
                             <Errors errors={this.props.errors} />
                             <div>
-                                <Link to='/admin'>Or login with email and password</Link>
+                                <Link to='/admin' onClick={this.props.resetState}>Or login with email and password</Link>
                             </div>
                         </div>
                     : <Spin />
@@ -54,7 +54,8 @@ const mapStateToProps = (store) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        login: (response) => dispatch(login(response))
+        login: (response) => dispatch(login(response)),
+        resetState: () => dispatch(resetState())
     };
 };
 

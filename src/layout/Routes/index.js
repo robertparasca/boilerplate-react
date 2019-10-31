@@ -10,6 +10,10 @@ import MyProfile from '../../pages/MyProfile';
 import Users from '../../pages/Users';
 import EditUser from '../../pages/EditUser';
 import LoginWithPassword from '../../pages/LoginWithPassword';
+import Forbidden from '../../pages/Forbidden';
+
+const ticketGuards = ['TicketController_index'];
+const newTicketGuards = ['TicketController_store'];
 
 const Routes = () => {
     return (
@@ -17,11 +21,12 @@ const Routes = () => {
             <PrivateRoute path='/' component={Home} exact />
             <Route path='/login' component={Login} exact />
             <Route path='/admin' component={LoginWithPassword} exact />
-            <PrivateRoute path='/tickets' component={Tickets} exact />
-            <PrivateRoute path='/tickets/new' component={Ticket} exact />
+            <PrivateRoute path='/tickets' component={Tickets} exact guards={ticketGuards} />
+            <PrivateRoute path='/tickets/new' component={Ticket} exact guards={newTicketGuards} />
             <PrivateRoute path='/my-profile' component={MyProfile} exact />
             <PrivateRoute path='/users' component={Users} exact />
             <PrivateRoute path='/users/:id' component={EditUser} exact />
+            <PrivateRoute path='/forbidden' component={Forbidden} exact />
         </Switch>
     );
 };

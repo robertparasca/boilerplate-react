@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { Button, Icon, Input, Spin, Form, Alert } from 'antd';
 import ReeValidator from 'ree-validate';
 
-import { loginWithPassword } from '../../redux/actions/auth';
+import { loginWithPassword, resetState } from '../../redux/actions/auth';
 import { connect } from 'react-redux';
 import Logo from '../../components/Logo';
 import Errors from '../../components/Errors';
@@ -98,7 +98,7 @@ class LoginWithPassword extends React.Component {
                             </Form>
                             <Errors errors={this.props.errors} />
                             <div style={{ textAlign: 'center' }}>
-                                <Link to='/login'>Or login with your Google account</Link>
+                                <Link to='/login' onClick={this.props.resetState}>Or login with your Google account</Link>
                             </div>
                         </div>
                     : <Spin />
@@ -116,7 +116,8 @@ const mapStateToProps = (store) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        login: (email, password) => dispatch(loginWithPassword(email, password))
+        login: (email, password) => dispatch(loginWithPassword(email, password)),
+        resetState: () => dispatch(resetState())
     };
 };
 

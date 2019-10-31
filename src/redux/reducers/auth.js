@@ -1,4 +1,11 @@
-import { LOGIN_HAPPENING, LOGIN_SUCCESS, LOGOUT_SUCCESS, LOGOUT_HAPPENING, LOGIN_FAILED } from '../actions/auth';
+import {
+    LOGIN_HAPPENING,
+    LOGIN_SUCCESS,
+    LOGOUT_SUCCESS,
+    LOGOUT_HAPPENING,
+    LOGIN_FAILED,
+    RESET_AUTH_STATE,
+} from '../actions/auth';
 import { tokenExists } from '../../utils/auth';
 
 const initialState = {
@@ -42,6 +49,12 @@ const auth = (state = initialState, action) => {
                 loading: false,
                 user: null,
                 permissions: []
+            };
+        }
+        case RESET_AUTH_STATE: {
+            return {
+                ...initialState,
+                isAuthenticated: tokenExists()
             };
         }
         default:

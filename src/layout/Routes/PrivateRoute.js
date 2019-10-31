@@ -2,11 +2,20 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 
-const PrivateRoute = ({ component: Component, ...rest}) => {
+import { hasPermissions } from '../../utils/permissions';
+
+const PrivateRoute = ({ component: Component, guards, ...rest}) => {
     const authState = useSelector((state) => state.auth);
+    console.log(authState.permissions);
     return (
         <Route {...rest} render={(props) => {
-            return authState.isAuthenticated ? <Component {...props} /> : <Redirect to={'/login'} />;
+            if (authState.isAuthenticated) {
+                if (hasPermissions(authState.permissions, guards)) {
+                    return <Component {...props} />
+                }
+                return <Redirect to='/forbidden' />;
+            }
+            return <Redirect to='/login' />;
         }} />
     );
 };

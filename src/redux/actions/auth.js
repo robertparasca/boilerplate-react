@@ -12,6 +12,7 @@ export const LOGIN_FAILED = 'LOGIN_FAILED';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const LOGOUT_HAPPENING = 'LOGOUT_HAPPENING';
 export const REFRESH_TOKEN = 'REFRESH_TOKEN';
+export const RESET_AUTH_STATE = 'RESET_AUTH_STATE';
 
 const formatNameFromGoogle = (name) => {
     return name ? name.split('/')[0] : '';
@@ -97,5 +98,11 @@ export const loginWithPassword = (email, password) => {
             handleErrors(e, dispatch, action);
         }
         // todo: to be implemented later;
+    };
+};
+
+export const resetState = () => {
+    return async (dispatch) => {
+        dispatch({ type: RESET_AUTH_STATE });
     };
 };
