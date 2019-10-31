@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Table } from 'antd';
+import { Button, Icon, Table } from 'antd';
+import { Link } from 'react-router-dom';
 
 import { fetchUsers } from '../../redux/actions/users';
 
@@ -16,11 +17,11 @@ class Users extends React.Component {
                 title: 'Email',
                 dataIndex: 'email'
             },
-            // {
-            //     title: 'Role',
-            //     dataIndex: 'is_student',
-            //     render: (value) => <span>{!!value ? 'Student' : 'Administrator'}</span>
-            // }
+            {
+                title: 'Edit permissions',
+                key: 'edit_permissions',
+                render: (value, row) => <Link to={`/users/${row.id}`}><Button type='primary'><Icon type='check' /></Button></Link>,
+            }
         ];
     }
 

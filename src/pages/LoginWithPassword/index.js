@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Button, Icon, Input, Spin, Form, Alert } from 'antd';
 import ReeValidator from 'ree-validate';
 
@@ -97,6 +97,9 @@ class LoginWithPassword extends React.Component {
                                 </div>
                             </Form>
                             <Errors errors={this.props.errors} />
+                            <div style={{ textAlign: 'center' }}>
+                                <Link to='/login'>Or login with your Google account</Link>
+                            </div>
                         </div>
                     : <Spin />
                 }

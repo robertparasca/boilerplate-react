@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import GoogleLogin from 'react-google-login';
 import { Spin } from 'antd';
 
@@ -35,6 +35,9 @@ class Login extends React.Component {
                                 )}
                             />
                             <Errors errors={this.props.errors} />
+                            <div>
+                                <Link to='/admin'>Or login with email and password</Link>
+                            </div>
                         </div>
                     : <Spin />
                 }
