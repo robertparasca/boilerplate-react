@@ -14,7 +14,7 @@ export const handleErrors = (e, dispatch, action) => {
         }
         case 403: {
             // todo;
-            dispatch(push('/forbidden'));
+            // dispatch(push('/forbidden'));
             console.log(123);
             dispatch(action);
             break;

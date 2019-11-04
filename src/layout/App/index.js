@@ -1,8 +1,9 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
 
 import store from '../../redux/store';
+import { history } from '../../redux/store';
 import Routes from '../Routes';
 
 import LayoutContent from '../LayoutContainer';
@@ -18,7 +19,7 @@ const App = () => {
     }
     return (
         <Provider store={store}>
-            <BrowserRouter>
+            <ConnectedRouter history={history}>
                 <AppLogic />
                 <LayoutContent>
                     <SidebarMenu />
@@ -26,7 +27,7 @@ const App = () => {
                         <Routes />
                     </ActualContent>
                 </LayoutContent>
-            </BrowserRouter>
+            </ConnectedRouter>
         </Provider>
     );
 };

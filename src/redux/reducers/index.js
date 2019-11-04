@@ -5,7 +5,7 @@ import auth from './auth';
 import tickets from './tickets';
 import ticket from './ticket';
 import users from './users';
-import editUser from './editUser';
+import editUserPermissions from './editUserPermissions';
 import permissions from './permissions';
 
 export default (history) => combineReducers({
@@ -14,6 +14,6 @@ export default (history) => combineReducers({
   tickets,
   ticket,
   users,
-  editUser,
+  editUserPermissions,
   permissions
 });

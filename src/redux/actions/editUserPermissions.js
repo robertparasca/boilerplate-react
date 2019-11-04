@@ -20,7 +20,8 @@ export const fetchUser = (id) => {
         } catch (e) {
             console.log(e);
             const action = { type: FETCHING_USER_ERROR };
-            dispatch(action);
+            dispatch(push('/forbidden'));
+            // dispatch(action);
             // handleErrors(e, dispatch, action);
         }
     };
@@ -39,6 +40,7 @@ export const changePermission = (userId, permissionId, state) => {
 
         } catch (e) {
             console.log(e);
+            dispatch(push('/forbidden'));
             const action = { type: CHANGE_USER_PERMISSION_ERROR };
             handleErrors(e, dispatch, action);
         }

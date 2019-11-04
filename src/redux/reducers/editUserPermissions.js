@@ -3,7 +3,7 @@ import {
     CHANGE_USER_PERMISSION_SUCCESS,
     FETCHING_USER,
     FETCHING_USER_SUCCESS,
-} from '../actions/editUser';
+} from '../actions/editUserPermissions';
 
 const initialState = {
     loading: false,
@@ -14,7 +14,7 @@ const initialState = {
     changePermissionFail: false
 };
 
-const editUser = (state = initialState, action) => {
+const editUserPermissions = (state = initialState, action) => {
     switch (action.type) {
         case FETCHING_USER: {
             return {
@@ -54,4 +54,4 @@ const editUser = (state = initialState, action) => {
     }
 };
 
-export default editUser;
+export default editUserPermissions;

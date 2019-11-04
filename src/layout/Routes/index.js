@@ -8,7 +8,7 @@ import Tickets from '../../pages/Tickets';
 import Ticket from '../../pages/Ticket';
 import MyProfile from '../../pages/MyProfile';
 import Users from '../../pages/Users';
-import EditUser from '../../pages/EditUser';
+import EditUserPermissions from '../../pages/EditUserPermissions';
 import LoginWithPassword from '../../pages/LoginWithPassword';
 import Forbidden from '../../pages/Forbidden';
 
@@ -25,7 +25,7 @@ const Routes = () => {
             <PrivateRoute path='/tickets/new' component={Ticket} exact guards={newTicketGuards} />
             <PrivateRoute path='/my-profile' component={MyProfile} exact />
             <PrivateRoute path='/users' component={Users} exact />
-            <PrivateRoute path='/users/:id' component={EditUser} exact />
+            <PrivateRoute path='/users/:id' component={EditUserPermissions} exact />
             <PrivateRoute path='/forbidden' component={Forbidden} exact />
         </Switch>
     );

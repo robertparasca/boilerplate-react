@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Checkbox, notification } from 'antd';
 import { hasPermissions } from '../../utils/permissions';
-import { changePermission } from '../../redux/actions/editUser';
+import { changePermission } from '../../redux/actions/editUserPermissions';
 
 const successNotification = () => {
     notification.open({
@@ -66,7 +66,7 @@ class PermissionCheckbox extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        ...state.editUser
+        ...state.editUserPermissions
     };
 };
 
