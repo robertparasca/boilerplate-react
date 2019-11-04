@@ -1,7 +1,11 @@
+import { push } from 'connected-react-router';
+
 import axiosInstance from '../../utils/axios';
+import { handleErrors } from '../../utils/handleErrors';
 
 export const FETCHING_USER = 'FETCHING_USER';
 export const FETCHING_USER_SUCCESS = 'FETCHING_USER_SUCCESS';
+export const FETCHING_USER_ERROR = 'FETCHING_USER_ERROR';
 export const CHANGE_USER_PERMISSION = 'CHANGE_USER_PERMISSION';
 export const CHANGE_USER_PERMISSION_SUCCESS = 'CHANGE_USER_PERMISSION_SUCCESS';
 export const CHANGE_USER_PERMISSION_ERROR = 'CHANGE_USER_PERMISSION_ERROR';
@@ -15,7 +19,9 @@ export const fetchUser = (id) => {
             dispatch({ type: FETCHING_USER_SUCCESS, user: data.user });
         } catch (e) {
             console.log(e);
-            dispatch({ type: FETCHING_USER_SUCCESS });
+            const action = { type: FETCHING_USER_ERROR };
+            dispatch(action);
+            // handleErrors(e, dispatch, action);
         }
     };
 };
@@ -33,6 +39,8 @@ export const changePermission = (userId, permissionId, state) => {
 
         } catch (e) {
             console.log(e);
+            const action = { type: CHANGE_USER_PERMISSION_ERROR };
+            handleErrors(e, dispatch, action);
         }
     };
 };

@@ -17,8 +17,8 @@ class LoginWithPassword extends React.Component {
             password: 'required'
         });
         this.state = {
-            email: '',
-            password: '',
+            email: 'parascarobert@gmail.com',
+            password: 'asd123',
             errors: this.validator.errors
         };
     }
@@ -66,6 +66,7 @@ class LoginWithPassword extends React.Component {
                                         type='email'
                                         prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />}
                                         onChange={this.handleOnChange}
+                                        value={this.state.email}
                                         className={this.validator.errors.has('reason') ? 'error-border' : null}
                                     />
                                 </Form.Item>
@@ -83,6 +84,7 @@ class LoginWithPassword extends React.Component {
                                         type='password'
                                         prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />}
                                         onChange={this.handleOnChange}
+                                        value={this.state.password}
                                     />
                                 </Form.Item>
                                 {
