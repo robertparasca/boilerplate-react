@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Checkbox, notification } from 'antd';
 import { hasPermissions } from '../../utils/permissions';
 import { changePermission } from '../../redux/actions/editUserPermissions';
+import { me } from '../../redux/actions/auth';
 
 const successNotification = () => {
     notification.open({
@@ -52,6 +53,9 @@ class PermissionCheckbox extends React.Component {
             checked: !oldState.checked
         }));
         successNotification();
+        if (this.props.refreshNeeded) {
+            this.props.me();
+        }
     };
 
     render() {
@@ -72,7 +76,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        changePermissions: (userId, permissionId, state) => dispatch(changePermission(userId, permissionId, state))
+        changePermissions: (userId, permissionId, state) => dispatch(changePermission(userId, permissionId, state)),
+        me: () => dispatch(me())
     };
 };
 

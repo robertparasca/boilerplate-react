@@ -2,6 +2,7 @@ import { push } from 'connected-react-router';
 
 import axiosInstance from '../../utils/axios';
 import { handleErrors } from '../../utils/handleErrors';
+import { LOGIN_HAPPENING } from './auth';
 
 export const FETCHING_USER = 'FETCHING_USER';
 export const FETCHING_USER_SUCCESS = 'FETCHING_USER_SUCCESS';
@@ -27,7 +28,7 @@ export const fetchUser = (id) => {
     };
 };
 
-export const changePermission = (userId, permissionId, state) => {
+export const changePermission = (userId, permissionId, state, refreshNeeded) => {
     return async (dispatch) => {
         dispatch({ type: CHANGE_USER_PERMISSION });
         const body = {
@@ -37,7 +38,9 @@ export const changePermission = (userId, permissionId, state) => {
         try {
             const response = await axiosInstance.post(`/users/${userId}/edit-permissions`, body);
             dispatch({ type: CHANGE_USER_PERMISSION_SUCCESS });
-
+            if (refreshNeeded) {
+                dispatch({ type: LOGIN_HAPPENING });
+            }
         } catch (e) {
             console.log(e);
             dispatch(push('/forbidden'));

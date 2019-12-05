@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import routes from './routes';
+import { hasPermissions } from '../../utils/permissions';
 
 const { Sider } = Layout;
 
@@ -26,6 +27,9 @@ class SidebarMenu extends Component {
                 <div className='logo' />
                 <Menu theme='dark' defaultSelectedKeys={[this.props.router.location.pathname]} mode='inline'>
                     {routes.map((route) => {
+                        if (!hasPermissions(this.props.auth.permissions, route.guards)) {
+                            return null;
+                        }
                         return (
                             <Menu.Item key={route.key}>
                                 <NavLink exact={route.exact} to={route.path} activeStyle={this.activeStyle}>
@@ -33,7 +37,7 @@ class SidebarMenu extends Component {
                                     <span>{route.name}</span>
                                 </NavLink>
                             </Menu.Item>
-                        )
+                        );
                     })}
                 </Menu>
             </Sider>

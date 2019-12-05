@@ -19,7 +19,14 @@ class PermissionsTable extends React.Component {
             {
                 title: 'Status',
                 key: 'status',
-                render: (value, row) => <PermissionCheckbox permission={row} userPermissions={this.props.userPermissions} checkboxChange={this.checkboxChange} />,
+                render: (value, row) => (
+                    <PermissionCheckbox
+                        permission={row}
+                        userPermissions={this.props.userPermissions}
+                        checkboxChange={this.checkboxChange}
+                        refreshNeeded={this.props.refreshNeeded}
+                    />
+                ),
             }
         ];
     }

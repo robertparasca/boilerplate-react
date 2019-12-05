@@ -4,20 +4,23 @@ export default [
         icon: 'pie-chart',
         name: 'Home',
         exact: true,
-        key: '/'
+        key: '/',
+        guards: []
     },
     {
         path: '/tickets',
         icon: 'desktop',
         name: 'Adeverințe',
         exact: true,
-        key: '/tickets|/tickets/new'
+        key: '/tickets|/tickets/new',
+        guards: ['TicketController_index']
     },
     {
         path: '/users',
         icon: 'desktop',
         name: 'Utilizatori',
         exact: true,
-        key: '/users'
+        key: '/users',
+        guards: ['UserController_index']
     }
 ]

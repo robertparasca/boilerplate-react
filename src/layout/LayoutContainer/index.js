@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 const LayoutContent = ({ children }) => {
     const authState = useSelector((state) => state.auth);
-    if (authState.isAuthenticated && authState.user === null) {
+    if ((authState.isAuthenticated && authState.user === null) || authState.loading) {
         return <Spin id='layout-content-spinner' />;
     }
     return (
