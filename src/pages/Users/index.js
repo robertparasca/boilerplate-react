@@ -10,7 +10,7 @@ class Users extends React.Component {
         super(props);
         this.columns = [
             {
-                title: 'Name',
+                title: 'Nume',
                 dataIndex: 'name'
             },
             {
@@ -18,7 +18,7 @@ class Users extends React.Component {
                 dataIndex: 'email'
             },
             {
-                title: 'Edit permissions',
+                title: 'Modifică permisiuni',
                 key: 'edit_permissions',
                 render: (value, row) => <Link to={`/users/${row.id}`}><Button type='primary'><Icon type='check' /></Button></Link>,
             }
@@ -32,7 +32,7 @@ class Users extends React.Component {
     render() {
         return (
             <section id='permissions-page'>
-                <h1>Users</h1>
+                <h2>Utilizatori</h2>
                 <Table rowKey='id' dataSource={this.props.users} columns={this.columns} loading={this.props.loading} />
             </section>
         );

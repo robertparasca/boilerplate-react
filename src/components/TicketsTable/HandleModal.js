@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Button, Modal, Icon, Form, Alert } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import ReeValidator from 'ree-validate';
+
 import { acceptTicket, rejectTicket } from '../../redux/actions/tickets';
 
 class HandleModal extends React.Component {
@@ -84,20 +85,21 @@ class HandleModal extends React.Component {
                     {this.props.reject ? <Icon type='close' /> : <Icon type='check' />}
                 </Button>
                 <Modal
-                    title={this.props.reject ? 'Reject' : 'Validate'}
+                    title={this.props.reject ? 'Respinge' : 'Validează'}
                     visible={this.state.visible}
                     onOk={this.handleConfirm}
                     onCancel={this.handleCancel}
+                    cancelText='Anulează'
                 >
                     {
                         this.props.reject ?
                             <>
-                                <p>Please write down what's wrong with this ticket.</p>
+                                <p>Vă rog să scrieți motivul pentru care respingeți cererea.</p>
                                 <Form>
                                     <Form.Item>
                                         <TextArea
                                             name={this.reasonReject}
-                                            placeholder='Reject reason'
+                                            placeholder='Motiv'
                                             onChange={this.handleOnChange}
                                             className={this.validator.errors.has(this.reasonReject) ? 'error-border' : null}
                                         />
@@ -112,7 +114,7 @@ class HandleModal extends React.Component {
                                 </Form>
                             </>
                         :
-                            <p>When you press confirm, the ticket will be generated.</p>
+                            <p>Atenție, după ce apeși "Ok", se va genera adeverința.</p>
                     }
                 </Modal>
             </>

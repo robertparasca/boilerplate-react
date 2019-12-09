@@ -13,7 +13,7 @@ class PermissionsTable extends React.Component {
         this.props.fetchPermissions();
         this.columns = [
             {
-                title: 'Name',
+                title: 'Nume',
                 dataIndex: 'name'
             },
             {

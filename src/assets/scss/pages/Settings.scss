@@ -1,0 +1,20 @@
+#settings-page {
+  .ticket-types {
+    .header {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+  .import-students {
+    .header {
+      display: flex;
+      justify-content: center;
+    }
+  }
+  .institute {
+    .header {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}

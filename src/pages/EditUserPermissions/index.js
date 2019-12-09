@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchUser } from '../../redux/actions/editUserPermissions';
-import { Spin } from 'antd';
+import { Spin, Tag } from 'antd';
 import PermissionsTable from './PermissionsTable';
 
 class EditUserPermissions extends React.Component {
@@ -24,8 +24,8 @@ class EditUserPermissions extends React.Component {
         }
         return (
             <section>
-                <h2>Edit {this.props.editUserPermissions.user.name}</h2>
-                <p>From here, you can edit the user permissions. Please be careful when changing the permissions.</p>
+                <h2>Modifici permisiunile pentru utilizatorul <Tag color='blue'>{this.props.editUserPermissions.user.name}</Tag></h2>
+                <p>Atenție! Ai grijă ce permisiuni oferi utilizatorilor!</p>
                 <PermissionsTable
                     userPermissions={this.props.editUserPermissions.user.permissions}
                     refreshNeeded={this.props.user.id === parseInt(this.props.match.params.id, 10)}

@@ -22,5 +22,13 @@ export default [
         exact: true,
         key: '/users',
         guards: ['UserController_index']
+    },
+    {
+        path: '/settings',
+        icon: 'desktop',
+        name: 'Setări',
+        exact: true,
+        key: '/settings',
+        guards: []
     }
 ]

@@ -7,6 +7,7 @@ import ticket from './ticket';
 import users from './users';
 import editUserPermissions from './editUserPermissions';
 import permissions from './permissions';
+import settings from './settings';
 
 export default (history) => combineReducers({
   router: connectRouter(history),
@@ -15,5 +16,6 @@ export default (history) => combineReducers({
   ticket,
   users,
   editUserPermissions,
-  permissions
+  permissions,
+  settings
 });

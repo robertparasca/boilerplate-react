@@ -33,13 +33,13 @@ class TicketsTable extends React.Component {
         this.props.getTickets();
         if (hasPermissions(this.props.auth.permissions, this.validatePermissions)) {
             this.columns.push({
-                title: 'Validate',
+                title: 'Validează',
                 dataIndex: 'status',
                 key: 'validate',
                 render: (value, row) => <HandleModal ticket={row} ticketStatus={value} />,
             });
             this.columns.push({
-                title: 'Reject',
+                title: 'Respinge',
                 dataIndex: 'status',
                 key: 'reject',
                 render: (value, row) => <HandleModal ticket={row} ticketStatus={value} reject={true} />,
