@@ -5,18 +5,21 @@ import { Link } from 'react-router-dom';
 
 import TicketTypes from '../../components/TicketTypes';
 import InstituteDetails from '../../components/InstituteDetails';
-import StudentsImport from '../../components/StudentsImport';
+import { RESET_UPLOAD_STATE, uploadStudentsFile } from '../../redux/actions/settings';
+import ImportTab from './ImportTab';
 
 const { TabPane } = Tabs;
 
 class Settings extends React.Component {
 
     callback = (key) => {
-        console.log(key);
+        if (key == 3) {
+            this.props.resetUploadState();
+        }
     };
 
-    onDrop = (acceptedFiles) => {
-        console.log(acceptedFiles);
+    onDrop = (acceptedFiles, chosenYear) => {
+        this.props.uploadExcel(acceptedFiles[0], chosenYear);
     };
 
     render() {
@@ -33,11 +36,7 @@ class Settings extends React.Component {
                         <TicketTypes />
                     </TabPane>
                     <TabPane tab='Import studenți' key='3' className='import-students'>
-                        <h3>Import studenți</h3>
-                        <p>De aici o să dăm import la excelul cu studenți la început de an</p>
-                        <div className='header'>
-                            <StudentsImport customOnDrop={this.onDrop} />
-                        </div>
+                        <ImportTab onDrop={this.onDrop} />
                     </TabPane>
                 </Tabs>
             </section>
@@ -47,13 +46,14 @@ class Settings extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-
+        ...state.settings
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-
+        uploadExcel: (file, year) => dispatch(uploadStudentsFile(file, year)),
+        resetUploadState: () => dispatch({ type: RESET_UPLOAD_STATE })
     };
 };
 

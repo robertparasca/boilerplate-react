@@ -11,4 +11,8 @@ export default {
         slug: 'active_year',
         name: 'An de studiu'
     },
+    active_semester: {
+        slug: 'active_semester',
+        name: 'Semestrul'
+    }
 };

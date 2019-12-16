@@ -15,6 +15,7 @@ import Settings from '../../pages/Settings';
 import TicketType from '../../pages/TicketType';
 import InstituteForm from '../../pages/InstituteForm';
 import NotFound from '../../pages/NotFound';
+import Students from '../../pages/Students';
 
 const ticketsGuards = ['TicketController_index'];
 const newTicketGuards = ['TicketController_store'];
@@ -35,6 +36,7 @@ const Routes = () => {
             <PrivateRoute path='/settings' component={Settings} exact />
             <PrivateRoute path='/settings/tickets/new' component={TicketType} exact />
             <PrivateRoute path='/settings/institute/edit' component={InstituteForm} exact />
+            <PrivateRoute path='/students' component={Students} exact />
             <PrivateRoute path='/forbidden' component={Forbidden} exact />
             <PrivateRoute path='/404' component={NotFound} />
             <Redirect to='/404' />

@@ -11,10 +11,6 @@ import CustomGoogleButton from './CustomGoogleButton';
 import Errors from '../../components/Errors';
 
 class Login extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         if (this.props.isAuthenticated) {
             return <Redirect to='/' />;

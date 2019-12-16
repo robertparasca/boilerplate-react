@@ -26,6 +26,7 @@ class InstituteDetails extends React.Component {
                     <li>Universitatea: {this.props.institute.university_name}</li>
                     <li>Facultatea: {this.props.institute.faculty_name}</li>
                     <li>An de studiu activ: {this.props.institute.active_year}</li>
+                    <li>Semestru activ: {this.props.institute.active_semester}</li>
                     <li>Decan: {this.props.institute.dean_name}</li>
                     <li>Secretar șef: {this.props.institute.chief_secretary}</li>
                 </ul>

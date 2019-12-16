@@ -15,13 +15,15 @@ class InstituteForm extends React.Component {
         this.validator = new ReeValidator({
             [this.fields.dean_name.name]: 'required',
             [this.fields.chief_secretary.name]: 'required',
-            [this.fields.active_year.name]: 'required'
+            [this.fields.active_year.name]: 'required',
+            [this.fields.active_semester.name]: 'required'
         });
         this.state = {
             form: {
                 [this.fields.dean_name.name]: '',
                 [this.fields.chief_secretary.name]: '',
-                [this.fields.active_year.name]: ''
+                [this.fields.active_year.name]: '',
+                [this.fields.active_semester.name]: ''
             },
             errors: this.validator.errors
         };
@@ -39,6 +41,7 @@ class InstituteForm extends React.Component {
                     [this.fields.dean_name.name]: this.props.institute[this.fields.dean_name.slug],
                     [this.fields.chief_secretary.name]: this.props.institute[this.fields.chief_secretary.slug],
                     [this.fields.active_year.name]: this.props.institute[this.fields.active_year.slug],
+                    [this.fields.active_semester.name]: this.props.institute[this.fields.active_semester.slug],
                 }
             }));
         }
@@ -132,6 +135,24 @@ class InstituteForm extends React.Component {
                                 <Alert type='error' message={this.validator.errors.first(this.fields.active_year.name)} />
                             </Form.Item>
                         : null
+                    }
+                    <Form.Item>
+                        <Input
+                            name={this.fields.active_semester.name}
+                            placeholder={this.fields.active_semester.name}
+                            type='text'
+                            prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            onChange={this.handleOnChange}
+                            value={this.state.form[this.fields.active_semester.name]}
+                            className={this.validator.errors.has(this.fields.active_semester.name) ? 'error-border' : null}
+                        />
+                    </Form.Item>
+                    {
+                        this.validator.errors.has(this.fields.active_semester.name) ?
+                            <Form.Item>
+                                <Alert type='error' message={this.validator.errors.first(this.fields.active_semester.name)} />
+                            </Form.Item>
+                            : null
                     }
                     <div>
                         <Button type='primary' htmlType='submit'>Salvează</Button>

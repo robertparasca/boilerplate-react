@@ -8,6 +8,7 @@ import users from './users';
 import editUserPermissions from './editUserPermissions';
 import permissions from './permissions';
 import settings from './settings';
+import students from './students';
 
 export default (history) => combineReducers({
   router: connectRouter(history),
@@ -17,5 +18,6 @@ export default (history) => combineReducers({
   users,
   editUserPermissions,
   permissions,
-  settings
+  settings,
+  students
 });

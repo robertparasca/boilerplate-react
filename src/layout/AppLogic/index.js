@@ -4,10 +4,6 @@ import { connect } from 'react-redux';
 import { me } from '../../redux/actions/auth';
 
 class AppLogic extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         if (this.props.isAuthenticated && this.props.user === null) {
             this.props.me();

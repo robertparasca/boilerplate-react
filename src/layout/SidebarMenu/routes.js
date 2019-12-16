@@ -24,6 +24,14 @@ export default [
         guards: ['UserController_index']
     },
     {
+        path: '/students',
+        icon: 'desktop',
+        name: 'Studenți',
+        exact: true,
+        key: '/students',
+        guards: []
+    },
+    {
         path: '/settings',
         icon: 'desktop',
         name: 'Setări',
