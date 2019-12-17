@@ -26,17 +26,17 @@ class Settings extends React.Component {
     render() {
         return (
             <section id='settings-page'>
-                <Tabs defaultActiveKey='1' onChange={this.callback}>
-                    <TabPane tab='Facultate' key='1' className='institute'>
+                <Tabs defaultActiveKey='1' onChange={this.callback} className='settings-tabs'>
+                    <TabPane tab='Facultate' key='1' className='institute individual-tab'>
                         <InstituteDetails />
                     </TabPane>
-                    <TabPane tab='Tipuri de adeverințe' key='2' className='ticket-types'>
+                    <TabPane tab='Tipuri de adeverințe' key='2' className='ticket-types individual-tab'>
                         <div className='header'>
                             <Button type='primary'><Link to='/settings/tickets/new'>Adaugă tip</Link></Button>
                         </div>
                         <TicketTypes />
                     </TabPane>
-                    <TabPane tab='Import studenți' key='3' className='import-students'>
+                    <TabPane tab='Import studenți' key='3' className='import-students individual-tab'>
                         <ImportTab onDrop={this.onDrop} />
                     </TabPane>
                 </Tabs>

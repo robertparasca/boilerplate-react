@@ -1,4 +1,12 @@
 #settings-page {
+  height: 100%;
+  .settings-tabs {
+    height: calc(100% - 44px);
+    .individual-tab,
+    .ant-tabs-content {
+      height: 100%;
+    }
+  }
   .ticket-types {
     .header {
       display: flex;
