@@ -8,7 +8,7 @@ const UploadExcel = ({ customOnDrop, chosenYear }) => {
     }, [chosenYear]);
     const { getRootProps, getInputProps } = useDropzone({
         onDrop,
-        accept: 'application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        accept: 'application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, .xlsx, .xls'
     });
 
     return (

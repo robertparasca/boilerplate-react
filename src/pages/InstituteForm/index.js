@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Alert, Button, Form, Icon, Input } from 'antd';
+import { Alert, Button, Form, Icon, Input, Spin } from 'antd';
 import ReeValidator from 'ree-validate';
 
 import { updateInstituteData, fetchInstituteData } from '../../redux/actions/settings';
@@ -34,14 +34,14 @@ class InstituteForm extends React.Component {
     };
 
     componentDidUpdate = (prevProps) => {
-        if (prevProps.institute !== this.props.institute) {
+        if (prevProps.institute.data !== this.props.institute.data) {
             this.setState((prevState) => ({
                 ...prevState,
                 form: {
-                    [this.fields.dean_name.name]: this.props.institute[this.fields.dean_name.slug],
-                    [this.fields.chief_secretary.name]: this.props.institute[this.fields.chief_secretary.slug],
-                    [this.fields.active_year.name]: this.props.institute[this.fields.active_year.slug],
-                    [this.fields.active_semester.name]: this.props.institute[this.fields.active_semester.slug],
+                    [this.fields.dean_name.name]: this.props.institute.data[this.fields.dean_name.slug],
+                    [this.fields.chief_secretary.name]: this.props.institute.data[this.fields.chief_secretary.slug],
+                    [this.fields.active_year.name]: this.props.institute.data[this.fields.active_year.slug],
+                    [this.fields.active_semester.name]: this.props.institute.data[this.fields.active_semester.slug],
                 }
             }));
         }
@@ -78,6 +78,9 @@ class InstituteForm extends React.Component {
     };
 
     render() {
+        if (this.props.institute.loading) {
+            return <Spin id='layout-inner-content-spinner' />
+        }
         return (
             <section id='institute-form-page'>
                 <h3>Form pentru a modifica informațiile</h3>

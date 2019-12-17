@@ -19,6 +19,7 @@ class Settings extends React.Component {
     };
 
     onDrop = (acceptedFiles, chosenYear) => {
+        console.log(acceptedFiles);
         this.props.uploadExcel(acceptedFiles[0], chosenYear);
     };
 

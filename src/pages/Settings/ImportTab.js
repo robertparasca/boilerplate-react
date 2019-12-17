@@ -7,7 +7,7 @@ import StudentsImport from '../../components/StudentsImport';
 const ImportTab = ({ onDrop }) => {
     const importState = useSelector((state) => state.settings);
     if (importState.import.loading) {
-        return <Spin />;
+        return <Spin id='layout-inner-content-spinner' />;
     }
 
     return (
@@ -24,8 +24,20 @@ const ImportTab = ({ onDrop }) => {
                         description='Datele au fost salvate cu succes..'
                         type='success'
                         showIcon
+                        className='alert-import'
                     />
                 : null
+            }
+            {
+                importState.import.errors.length ?
+                    <Alert
+                        message='Import nu a fost realizat cu succes'
+                        description='A apărut o eroare în timpul importului. Te rugăm să încerci din nou.'
+                        type='error'
+                        showIcon
+                        className='alert-import'
+                    />
+                    : null
             }
         </>
     )

@@ -50,7 +50,7 @@ class NewTicketForm extends React.Component {
 
     render() {
         if (this.props.loading) {
-            return <Spin/>;
+            return <Spin id='layout-inner-content-spinner' />;
         }
         if (this.props.finished) {
             return (

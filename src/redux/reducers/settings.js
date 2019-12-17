@@ -1,6 +1,8 @@
 import {
     FETCHING_INSTITUTE_DATA,
-    FETCHING_INSTITUTE_DATA_SUCCESS, RESET_UPLOAD_STATE,
+    FETCHING_INSTITUTE_DATA_SUCCESS,
+    FETCHING_INSTITUTE_DATA_FAIL,
+    RESET_UPLOAD_STATE,
     UPLOAD_STUDENTS_FILE, UPLOAD_STUDENTS_FILE_FAIL,
     UPLOAD_STUDENTS_FILE_SUCCESS,
 } from '../actions/settings';
@@ -8,7 +10,11 @@ import {
 const initialState = {
     loading: false,
     errors: [],
-    institute: {},
+    institute: {
+        loading: false,
+        errors: [],
+        data: {}
+    },
     import: {
         loading: false,
         errors: [],
@@ -21,14 +27,32 @@ const permissions = (state = initialState, action) => {
         case FETCHING_INSTITUTE_DATA: {
             return {
                 ...state,
-                loading: true
+                institute: {
+                    ...state.institute,
+                    loading: true
+                }
             };
         }
         case FETCHING_INSTITUTE_DATA_SUCCESS: {
             return {
                 ...state,
                 loading: false,
-                institute: action.institute
+                institute: {
+                    ...state.institute,
+                    loading: false,
+                    data: action.institute
+                }
+            };
+        }
+        case FETCHING_INSTITUTE_DATA_FAIL: {
+            return {
+                ...state,
+                loading: false,
+                institute: {
+                    ...state.institute,
+                    loading: false,
+                    errors: ['You broke something']
+                }
             };
         }
         case UPLOAD_STUDENTS_FILE: {
