@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Input, Select, Tag } from 'antd';
+import Preview from './Preview';
 
 const { Option } = Select;
 
@@ -10,7 +11,7 @@ class TicketType extends React.Component {
         field: undefined,
         ticket: '',
         fields: [],
-        r: false
+        preview: false
     };
 
     onChange = (event) => {
@@ -28,33 +29,34 @@ class TicketType extends React.Component {
     };
 
     selectOnChange = (value) => {
-        this.setState({ field: value });
+        this.setState({ field: value }, () => this.addField());
+
     };
 
-    b = (ticketString) => {
-        const words = [];
-        const replaceWord = 'replaceWord';
-        let ticketStringToArr = ticketString.split('');
-        let oldIndex = 0;
-        this.state.fields.forEach(field => {
-            console.log(field);
-            let i = ticketString.search('{');
-            let finish = ticketString.search('}');
-            for (i; i <= finish; i++) {
-                ticketStringToArr[i] = replaceWord;
-
-            }
-            ticketStringToArr = ticketStringToArr.filter(i => i !== replaceWord);
-            ticketString = ticketStringToArr.join('');
-            let word = ticketStringToArr.slice(oldIndex, i-1).join('');
-            words.push(word);
-            oldIndex = finish + 1;
-            console.log(ticketString);
-            console.log('------------------------');
-        });
-
-        return words;
-    };
+    // b = (ticketString) => {
+    //     const words = [];
+    //     const replaceWord = 'replaceWord';
+    //     let ticketStringToArr = ticketString.split('');
+    //     let oldIndex = 0;
+    //     this.state.fields.forEach(field => {
+    //         console.log(field);
+    //         let i = ticketString.search('{');
+    //         let finish = ticketString.search('}');
+    //         for (i; i <= finish; i++) {
+    //             ticketStringToArr[i] = replaceWord;
+    //
+    //         }
+    //         ticketStringToArr = ticketStringToArr.filter(i => i !== replaceWord);
+    //         ticketString = ticketStringToArr.join('');
+    //         let word = ticketStringToArr.slice(oldIndex, i-1).join('');
+    //         words.push(word);
+    //         oldIndex = finish + 1;
+    //         console.log(ticketString);
+    //         console.log('------------------------');
+    //     });
+    //
+    //     return words;
+    // };
 
     /**
      * words = ['Domnul ', 'este student în anul ']
@@ -87,6 +89,9 @@ class TicketType extends React.Component {
      * ['{student_name}', '{student_year}'] dynamic
      * Domnul {student_name} este student in anul {student_year} => in textarea
      */
+    /**
+     * Trei textarea-uri pentru header, content și footer. Nu știu dacă să-l pune steps sau să le las una sub alta?
+     */
     render() {
         console.log(this.state.ticket);
         return (
@@ -97,18 +102,24 @@ class TicketType extends React.Component {
                         <Option value='student_name'>Numele studentului</Option>
                         <Option value='student_year'>Anul de studii</Option>
                     </Select>
-                    <Button type='primary' onClick={this.addField}>Add field</Button>
                 </div>
                 <form noValidate>
                     <Input.TextArea
                         rows={4}
                         onChange={this.onChange}
-                        disabled={this.state.disabled}
+                        disabled={this.state.preview}
                         value={this.state.ticket}
                     />
                 </form>
-                <h3>Live preview</h3>
-                { this.state.ticket }
+                <Button disabled={this.state.preview} onClick={() => this.setState({ preview: true })}>Preview</Button>
+                <Button disabled={!this.state.preview} onClick={() => this.setState({ preview: false })}>Stop preview & continue editing</Button>
+                {/*<div>*/}
+                {/*    {*/}
+                {/*        this.state.preview ?*/}
+                {/*            <Preview fields={this.state.fields} ticket={this.state.ticket} />*/}
+                {/*        : null*/}
+                {/*    }*/}
+                {/*</div>*/}
             </section>
         );
     }
